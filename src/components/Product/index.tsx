@@ -39,7 +39,8 @@ const Product = ({
       </Tag>
       <Descricao>{description}</Descricao>
       <Botao>
-        <Link to={'/produto'}>{link}</Link>
+        <Link to={`/InternoRestaurante`}>{link}</Link>
+        {/* <Link to={`/InternoRestaurante/${title}`}>{link}</Link> */}
       </Botao>
     </div>
   </Card>
