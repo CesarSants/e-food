@@ -6,11 +6,16 @@ import { Card } from '../Product/styles'
 export const Container = styled.section<Omit<Props, 'title' | 'restaurantes'>>`
   padding: 32px 0;
   background-color: ${(props) =>
-    props.background === 'pink' ? cores.preta : cores.cinza};
+    props.background === 'white' ? cores.pinkback : cores.cinza};
 
   ${Card} {
     background-color: ${(props) =>
-      props.background === 'pink' ? cores.cinza : cores.preta};
+      props.background === 'white' ? cores.branca : cores.preta};
+
+    p {
+      color: ${(props) =>
+        props.background === 'white' ? cores.pinkChoque : cores.preta};
+    }
   }
 `
 
@@ -19,7 +24,7 @@ export const List = styled.ul`
   grid-template-columns: 1fr 1fr;
   column-gap: 80px;
   row-gap: 48px;
-  margin-top: 40px;
+  margin-top: 48px;
 `
 
 export const Title = styled.h2`

@@ -9,10 +9,9 @@ export type Props = {
   restaurantes: Restaurante[]
 }
 
-const ProductsList = ({ background, title, restaurantes }: Props) => (
+const ProductsList = ({ background, restaurantes }: Omit<Props, 'title'>) => (
   <Container background={background}>
     <div className="container">
-      <h2>{title}</h2>
       <List>
         {restaurantes.map((restaurante) => (
           <Product

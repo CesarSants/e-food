@@ -37,6 +37,7 @@ export const Titulo = styled.h3`
   display: inline-block;
   justify-content: end;
   line-height: 21px;
+  color: ${cores.pinkChoque};
 `
 export const Descricao = styled.p`
   font-size: 14px;

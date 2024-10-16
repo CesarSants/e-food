@@ -6,7 +6,7 @@ import {
   // Routes,                            esse metodo é utilizado com o BrowserRouter mas esta importado no arquivo routes
   // Route
 } from 'react-router-dom'
-import Header from './components/Header'
+// import Header from './components/Header'
 import { GlobalCss } from './styles'
 // import Home from './pages/Home'
 // import Categories from './pages/Categories'                   esta importado no arquivo routes
@@ -30,9 +30,9 @@ function App() {
     <BrowserRouter>
       {/* antes aqui era apenas um fragmento*/}
       <GlobalCss />
-      <div className="container">
+      {/* <div className="container">
         <Header />
-      </div>
+      </div> */}
       {/* <RouterProvider router={Rotas} />            esse metodo é utilizado com o json, igual esta comentado no arquivo routes*/}
       <Rotas />
       <Footer />

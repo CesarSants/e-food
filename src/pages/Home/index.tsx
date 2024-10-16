@@ -1,4 +1,4 @@
-import Banner from '../../components/Banner'
+import HeaderHome from '../../components/HeaderHome'
 import ProductsList from '../../components/ProductsList'
 import Restaurante from '../../models/Restaurante'
 import japa from '../../assets/images/japa.png'
@@ -75,8 +75,8 @@ const home: Restaurante[] = [
 
 const Home = () => (
   <>
-    <Banner />
-    <ProductsList restaurantes={home} title="Promoções" background="white" />
+    <HeaderHome />
+    <ProductsList restaurantes={home} background="white" />
   </>
 )
 

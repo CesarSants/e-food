@@ -2,15 +2,13 @@ import { createGlobalStyle } from 'styled-components'
 
 export const cores = {
   branca: '#fff',
-  // preta: '#111111',
-  // preta: '7, 8, 12',
-  // preta: 'rgba(7, 8, 12, 1.85)',
   preta: 'rgb(7, 8, 12)',
   cinzaClaro: '#a3a3a3',
   cinza: '#333333',
   verde: '#10ac84',
   pinkChoque: '#e66767',
-  pink: '##FFEBD9'
+  pink: '#FFEBD9',
+  pinkback: '#fff8f2'
 }
 
 export const GlobalCss = createGlobalStyle`
@@ -25,7 +23,7 @@ export const GlobalCss = createGlobalStyle`
   body{
     background-color: ${cores.preta};
     color: ${cores.branca};
-    padding-top: 40px;
+
 
     ::before {
     content: '';
