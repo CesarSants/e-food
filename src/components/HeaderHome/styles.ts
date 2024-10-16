@@ -22,7 +22,7 @@ export const Content = styled.div`
 
   p {
     color: ${cores.pinkChoque};
-    width: 539px;
+    max-width: 539px;
     font-size: 36px;
     font-weight: 900;
     margin: 138px auto 0;

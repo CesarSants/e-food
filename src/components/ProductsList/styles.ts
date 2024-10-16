@@ -4,7 +4,7 @@ import { cores } from '../../styles'
 import { Card } from '../Product/styles'
 
 export const Container = styled.section<Omit<Props, 'title' | 'restaurantes'>>`
-  padding: 32px 0;
+  padding: 32px 0 120px;
   background-color: ${(props) =>
     props.background === 'white' ? cores.pinkback : cores.cinza};
 
