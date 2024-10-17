@@ -56,10 +56,12 @@ export const Infos = styled.div`
 export const Botao = styled.span`
   background-color: ${cores.pinkChoque};
   color: ${cores.pink};
-  width: 82px;
+  max-width: 82px;
   height: 24px;
-  padding: 6px;
-  display: block;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   a {
     color: inherit;
@@ -67,10 +69,10 @@ export const Botao = styled.span`
     font-weight: bold;
     font-size: 14px;
     line-height: 16px;
-    top: 4px;
-    left: 6px;
-    height: 16px;
-    width: 70px;
-    display: block;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `

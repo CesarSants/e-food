@@ -1,19 +1,13 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
-  background-color: ${cores.branca};
-  /* color: ${cores.pinkChoque}; */
-
-  padding: 0px;
+  padding: 8px;
   position: relative;
 
-  /* ${TagContainer} {
-    /* margin-right: 8px; */
   > img {
-    height: 217px;
-    width: 472px;
+    height: 167px;
+    width: 304px;
     overflow-y: hidden;
     object-fit: cover;
     /* object-position: center; */
@@ -23,28 +17,24 @@ export const Card = styled.div`
   }
 
   .cont {
-    padding: 8px;
-    border: 1px solid ${cores.pinkChoque};
-    border-top: 0px;
-    box-sizing: border-box;
-    /* color: ${cores.pinkChoque}; */
+    padding: 0;
   }
 `
 
 export const Titulo = styled.h3`
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   display: inline-block;
   justify-content: end;
-  line-height: 21px;
-  color: ${cores.pinkChoque};
+  line-height: 18px;
+  margin: 8px 0;
 `
 export const Descricao = styled.p`
   font-size: 14px;
   line-height: 22px;
   display: block;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  font-weight: 400;
 `
 
 export const Infos = styled.div`
@@ -52,14 +42,15 @@ export const Infos = styled.div`
   top: 16px;
   right: 16px;
 `
-
 export const Botao = styled.span`
-  background-color: ${cores.pinkChoque};
-  color: ${cores.pink};
-  width: 82px;
+  background-color: ${cores.pink};
+  color: ${cores.pinkChoque};
   height: 24px;
-  padding: 6px;
-  display: block;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   a {
     color: inherit;
@@ -67,10 +58,10 @@ export const Botao = styled.span`
     font-weight: bold;
     font-size: 14px;
     line-height: 16px;
-    top: 4px;
-    left: 6px;
-    height: 16px;
-    width: 70px;
-    display: block;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
