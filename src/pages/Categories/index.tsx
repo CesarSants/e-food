@@ -1,7 +1,9 @@
 import pizza from '../../assets/images/pizza.png'
 import PratoResList from '../../components/PratoResList'
+import Banner from '../../components/Banner'
 
 import Prato from '../../models/Prato'
+import HeaderRes from '../../components/HeaderRes'
 
 const pratos1: Prato[] = [
   {
@@ -56,6 +58,8 @@ const pratos1: Prato[] = [
 
 const InternoRestaurante = () => (
   <>
+    <HeaderRes />
+    <Banner />
     <PratoResList background="pink" pratos={pratos1} />
   </>
 )

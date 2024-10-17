@@ -1,27 +1,12 @@
-import { Imagem, BannerContainer, Titulo, Precos } from './styles'
-import bannerImg from '../../assets/images/banner-homem-aranha.png'
-import Tag from '../Tag'
-import Button from '../Button'
+import { Imagem, BannerContainer, Titulo, Classe } from './styles'
+import italiano from '../../assets/images/imagem-de-fundo.png'
 
 const Banner = () => (
-  <Imagem style={{ backgroundImage: `url(${bannerImg})` }}>
+  <Imagem style={{ backgroundImage: `url(${italiano})` }}>
     <BannerContainer>
       <div className="container">
-        <Tag size="small">Destaque do dia</Tag>
-        <div>
-          <Titulo>Marvel&apos;s Spider-Man: Miles Morales PS4 & PS5</Titulo>
-          <Precos>
-            De <span>R$ 250,00</span> <br />
-            por apenas R$ 99,90
-          </Precos>
-        </div>
-        <Button
-          type="buttonPrato"
-          to="/produto"
-          title="Clique aqui para aproveitar esta oferta"
-        >
-          Aproveitar
-        </Button>
+        <Classe>Italiana</Classe>
+        <Titulo>La Dolce Vita Trattoria</Titulo>
       </div>
     </BannerContainer>
   </Imagem>
