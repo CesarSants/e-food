@@ -13,6 +13,7 @@ import { GlobalCss } from './styles'
 
 import Rotas from './routes'
 import Footer from './components/Footer'
+import ScrollToTop from './ScrollToTop'
 
 // const rotas = createBrowserRouter([               esse metodo é utilizaDO usando o router provider, porem o header esta antes dele
 //   {                                               entao para resolver esse problema utilizamos o Browser router no fragmento e a escrita
@@ -28,6 +29,7 @@ import Footer from './components/Footer'
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop position={0} />
       {/* antes aqui era apenas um fragmento*/}
       <GlobalCss />
       {/* <div className="container">
