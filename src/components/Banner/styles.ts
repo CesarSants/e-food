@@ -21,7 +21,7 @@ export const BannerContainer = styled.div`
 `
 
 export const Titulo = styled.h2`
-  font-size: 36px;
+  font-size: 32px;
   font-weight: bold;
   max-width: 450px;
   padding-bottom: 32px;
