@@ -21,6 +21,7 @@ const PratoResList = ({ background, pratos }: Omit<Props, 'title'>) => (
             description={prato.description}
             image={prato.image}
             link={prato.link}
+            price={prato.price}
           />
         ))}
       </List>

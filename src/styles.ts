@@ -24,7 +24,7 @@ export const GlobalCss = createGlobalStyle`
     background-color: ${cores.preta};
     color: ${cores.branca};
 
-
+/*
     ::before {
     content: '';
     position: absolute;
@@ -34,7 +34,7 @@ export const GlobalCss = createGlobalStyle`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.10);
     z-index: -2;
-  }
+  } */
   }
 
   .container {

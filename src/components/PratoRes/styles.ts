@@ -18,6 +18,10 @@ export const Card = styled.div`
 
   .cont {
     padding: 0;
+
+    /* p:nth-child(3) {
+      display: none;
+    } */
   }
 `
 
@@ -51,6 +55,9 @@ export const Botao = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
 
   a {
     color: inherit;
@@ -63,5 +70,83 @@ export const Botao = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+`
+export const Modal = styled.div`
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+
+  &.visible {
+    display: flex;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+`
+
+export const ModalContent = styled.div`
+  display: block;
+  position: relative;
+  max-width: 100%;
+  z-index: 1;
+  background-color: ${cores.pinkChoque};
+
+  > img {
+    float: right;
+    margin: 8px;
+    cursor: pointer;
+  }
+`
+
+export const MainContent = styled.div`
+  padding: 32px;
+  display: flex;
+
+  h4 {
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  p {
+    margin: 16px 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  img {
+    display: block;
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  div:first-child {
+    width: 280px;
+    height: 280px;
+  }
+
+  div:nth-child(2) {
+    margin-left: 24px;
+  }
+
+  ${Botao} {
+    width: auto;
+    display: inline-flex;
+    padding: 4px 7px;
   }
 `

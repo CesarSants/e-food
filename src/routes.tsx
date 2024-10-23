@@ -24,7 +24,7 @@ import InternoRestaurante from './pages/Categories'
 const Rotas = () => (
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/InternoRestaurante" element={<InternoRestaurante />} />
+    <Route path="/InternoRestaurante/:id" element={<InternoRestaurante />} />
   </Routes>
 )
 
