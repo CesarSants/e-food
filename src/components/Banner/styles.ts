@@ -6,6 +6,19 @@ export const Imagem = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   font-weight: bold;
+  position: relative;
+  z-index: -2;
+
+  ::after {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.16);
+    z-index: -1;
+  }
 
   .container {
     display: flex;
