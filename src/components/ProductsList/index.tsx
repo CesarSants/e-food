@@ -1,4 +1,4 @@
-import Restaurante from '../../models/Restaurante'
+import { Restaurante } from '../../pages/Home'
 import Product from '../Product'
 
 import { List, Container } from './styles'
@@ -9,25 +9,27 @@ export type Props = {
   restaurantes: Restaurante[]
 }
 
-const ProductsList = ({ background, restaurantes }: Omit<Props, 'title'>) => (
-  <Container background={background}>
-    <div className="container">
-      <List>
-        {restaurantes.map((restaurante) => (
-          <Product
-            key={restaurante.id}
-            category={restaurante.category}
-            title={restaurante.title}
-            description={restaurante.description}
-            image={restaurante.image}
-            infos={restaurante.infos}
-            link={restaurante.link}
-            rate={restaurante.rate}
-          />
-        ))}
-      </List>
-    </div>
-  </Container>
-)
+const ProductsList = ({ background, restaurantes }: Omit<Props, 'title'>) => {
+  return (
+    <Container background={background}>
+      <div className="container">
+        <List>
+          {restaurantes.map((restaurante) => (
+            <Product
+              titulo={restaurante.titulo}
+              destacado={restaurante.destacado}
+              tipo={restaurante.tipo}
+              descricao={restaurante.descricao}
+              capa={restaurante.capa}
+              avaliacao={restaurante.avaliacao}
+              key={restaurante.id}
+              id={restaurante.id}
+            />
+          ))}
+        </List>
+      </div>
+    </Container>
+  )
+}
 
 export default ProductsList

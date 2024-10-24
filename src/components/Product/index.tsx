@@ -7,42 +7,67 @@ import { Link } from 'react-router-dom'
 // import { useParams } from 'react-router-dom'
 
 type Props = {
-  category: string
-  title: string
-  description: string
-  image: string
-  rate: string
-  infos: string[]
-  link: string
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: Array<{
+    foto: string
+    preco: number
+    id: number
+    nome: string
+    descricao: string
+    porcao: string
+  }>
+}
+
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
 }
 
 const Product = ({
-  category,
-  title,
-  description,
-  image,
-  rate,
-  infos,
-  link
-}: Props) => {
+  id,
+  titulo,
+  destacado,
+  tipo,
+  avaliacao,
+  descricao,
+  capa
+}: Omit<Props, 'cardapio'>) => {
+  const getTag = (
+    restaurante: Omit<
+      Props,
+      'cardapio' | 'id' | 'titulo' | 'tipo' | 'avaliacao' | 'descricao' | 'capa'
+    >
+  ) => {
+    if (restaurante.destacado) {
+      return 'Destaque da semana'
+    }
+    return ''
+  }
+
   return (
     <Card>
-      <img src={image} alt={title} />
+      <img src={capa} alt={titulo} />
       <div className="cont">
         <Infos>
-          {infos.map((info) => (
-            <Tag key={info}>{info}</Tag>
-          ))}
-          <Tag>{category}</Tag>
+          {destacado && <Tag>{getTag({ destacado })}</Tag>}
+          <Tag>{tipo}</Tag>
         </Infos>
-        <Titulo>{title}</Titulo>
+        <Titulo>{titulo}</Titulo>
         <Tag size="transparent">
-          {rate}
+          {avaliacao}
           <img src={star} alt="estrela" />
         </Tag>
-        <Descricao>{description}</Descricao>
+        <Descricao>{descricao}</Descricao>
         <Botao>
-          <Link to={`/InternoRestaurante`}>{link}</Link>
+          <Link to={`/InternoRestaurante/${id}`}>Saiba mais</Link>
           {/* <Link to={`/InternoRestaurante/${title}`}>{link}</Link> */}
         </Botao>
       </div>
