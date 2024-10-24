@@ -108,6 +108,7 @@ export const ModalContent = styled.div`
   max-width: 100%;
   z-index: 1;
   background-color: ${cores.pinkChoque};
+  max-width: 1024px;
 
   > img {
     float: right;
