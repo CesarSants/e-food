@@ -1,3 +1,4 @@
+import { formataPreco } from '../Product'
 import {
   Card,
   Descricao,
@@ -7,30 +8,31 @@ import {
   ModalContent,
   MainContent
 } from './styles'
-// import { Link } from 'react-router-dom'
 import close from '../../assets/images/close 1.png'
 import { useState } from 'react'
 
-type Props = {
-  title: string
-  description: string
-  image: string
-  link: string
-  price: number
+export interface PratoProps {
+  id: number
+  foto: string
+  preco: number
+  nome: string
+  descricao: string
+  porcao: string
 }
 
-const PratoUn = ({ title, description, image, link, price }: Props) => {
+const PratoUn = ({ id, foto, nome, descricao, porcao, preco }: PratoProps) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
 
   return (
     <>
-      <Card>
-        <img src={image} alt={title} />
+      <Card key={id}>
+        <img src={foto} alt={nome} />
         <div className="cont">
-          <Titulo>{title}</Titulo>
-          <Descricao>{description}</Descricao>
-          {/* <p>{price}</p> */}
-          <Botao onClick={() => setModalEstaAberto(true)}>{link}</Botao>
+          <Titulo>{nome}</Titulo>
+          <Descricao>{descricao}</Descricao>
+          <Botao onClick={() => setModalEstaAberto(true)}>
+            Adicionar ao carrinho
+          </Botao>
         </div>
       </Card>
       <Modal className={modalEstaAberto ? 'visible' : ''}>
@@ -38,12 +40,15 @@ const PratoUn = ({ title, description, image, link, price }: Props) => {
           <img src={close} onClick={() => setModalEstaAberto(false)} alt="" />
           <MainContent>
             <div>
-              <img src={image} alt="" />
+              <img src={foto} alt={nome} />
             </div>
             <div>
-              <h4>{title}</h4>
-              <p>{description}</p>
-              <Botao>Adicionar ao carrinho - {price}</Botao>
+              <h4>{nome}</h4>
+              <p>
+                {descricao} <br /> <br />
+                {porcao}
+              </p>
+              <Botao>Adicionar ao carrinho - {formataPreco(preco)}</Botao>
             </div>
           </MainContent>
         </ModalContent>

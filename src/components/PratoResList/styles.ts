@@ -3,7 +3,7 @@ import { Props } from '.'
 import { cores } from '../../styles'
 import { Card } from '../PratoRes/styles'
 
-export const Container = styled.section<Omit<Props, 'title' | 'pratos'>>`
+export const Container = styled.section<Omit<Props, 'title' | 'cardapio'>>`
   padding: 56px 0 120px;
   background-color: ${(props) =>
     props.background === 'white' ? cores.pinkback : cores.pinkback};

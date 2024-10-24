@@ -1,27 +1,34 @@
-import Prato from '../../models/Prato'
-// import Restaurante from '../../models/Restaurante'
 import PratoUn from '../PratoRes'
-
 import { List, Container } from './styles'
 
-export type Props = {
-  title: string
-  background: 'white' | 'pink'
-  pratos: Prato[]
+export interface Prato {
+  //solução do problema, criar um tipo para o cardapio  e outro para o restante e importar um no outro
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
 }
 
-const PratoResList = ({ background, pratos }: Omit<Props, 'title'>) => (
+export interface Props {
+  background: 'white' | 'pink'
+  cardapio: Prato[]
+}
+
+const PratoResList = ({ background, cardapio }: Props) => (
   <Container background={background}>
     <div className="container">
       <List>
-        {pratos.map((prato) => (
+        {cardapio.map((prato) => (
           <PratoUn
             key={prato.id}
-            title={prato.title}
-            description={prato.description}
-            image={prato.image}
-            link={prato.link}
-            price={prato.price}
+            id={prato.id}
+            nome={prato.nome}
+            descricao={prato.descricao}
+            foto={prato.foto}
+            porcao={prato.porcao}
+            preco={prato.preco}
           />
         ))}
       </List>

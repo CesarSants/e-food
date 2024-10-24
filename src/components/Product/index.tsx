@@ -4,9 +4,7 @@ import star from '../../assets/images/star.png'
 import { Card, Descricao, Titulo, Infos, Botao } from './styles'
 import { Link } from 'react-router-dom'
 
-// import { useParams } from 'react-router-dom'
-
-type Props = {
+export interface Props {
   id: number
   titulo: string
   destacado: boolean
@@ -68,7 +66,6 @@ const Product = ({
         <Descricao>{descricao}</Descricao>
         <Botao>
           <Link to={`/InternoRestaurante/${id}`}>Saiba mais</Link>
-          {/* <Link to={`/InternoRestaurante/${title}`}>{link}</Link> */}
         </Botao>
       </div>
     </Card>

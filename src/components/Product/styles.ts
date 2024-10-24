@@ -45,6 +45,11 @@ export const Descricao = styled.p`
   display: block;
   margin-top: 16px;
   margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const Infos = styled.div`
