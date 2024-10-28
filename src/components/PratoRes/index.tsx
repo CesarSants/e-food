@@ -8,8 +8,10 @@ import {
   ModalContent,
   MainContent
 } from './styles'
-import close from '../../assets/images/close 1.png'
+import close1 from '../../assets/images/close 1.png'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
 
 export interface PratoProps {
   id: number
@@ -20,16 +22,30 @@ export interface PratoProps {
   porcao: string
 }
 
-const PratoUn = ({ id, foto, nome, descricao, porcao, preco }: PratoProps) => {
+export type Props = {
+  prato: PratoProps
+}
+
+const PratoUn = ({ prato }: Props) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(add(prato))
+    dispatch(open())
+  }
+
+  const fechaModal = () => {
+    setModalEstaAberto(false)
+  }
 
   return (
     <>
-      <Card key={id}>
-        <img src={foto} alt={nome} />
+      <Card key={prato.id}>
+        <img src={prato.foto} alt={prato.nome} />
         <div className="cont">
-          <Titulo>{nome}</Titulo>
-          <Descricao>{descricao}</Descricao>
+          <Titulo>{prato.nome}</Titulo>
+          <Descricao>{prato.descricao}</Descricao>
           <Botao onClick={() => setModalEstaAberto(true)}>
             Adicionar ao carrinho
           </Botao>
@@ -37,25 +53,27 @@ const PratoUn = ({ id, foto, nome, descricao, porcao, preco }: PratoProps) => {
       </Card>
       <Modal className={modalEstaAberto ? 'visible' : ''}>
         <ModalContent className="container">
-          <img src={close} onClick={() => setModalEstaAberto(false)} alt="" />
+          <img src={close1} onClick={() => setModalEstaAberto(false)} alt="" />
           <MainContent>
             <div>
-              <img src={foto} alt={nome} />
+              <img src={prato.foto} alt={prato.nome} />
             </div>
             <div>
-              <h4>{nome}</h4>
+              <h4>{prato.nome}</h4>
               <p>
-                {descricao} <br /> <br />
-                {porcao}
+                {prato.descricao} <br /> <br />
+                {prato.porcao}
               </p>
-              <Botao>Adicionar ao carrinho - {formataPreco(preco)}</Botao>
+              <Botao
+                title="Clique aqui para adicionar ao carrinho"
+                onClick={addToCart}
+              >
+                Adicionar ao carrinho - {formataPreco(prato.preco)}
+              </Botao>
             </div>
           </MainContent>
         </ModalContent>
-        <div
-          className="overlay"
-          onClick={() => setModalEstaAberto(false)}
-        ></div>
+        <div className="overlay" onClick={fechaModal}></div>
       </Modal>
     </>
   )

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import PratoResList from '../../components/PratoResList'
 import Banner from '../../components/Banner'
 import { useGetRestaurantesInternoQuery } from '../../services/api'
+import Cart from '../../components/Cart'
 
 const InternoRestaurante = () => {
   const { id } = useParams()
@@ -70,6 +71,7 @@ const InternoRestaurante = () => {
       {restaurante && (
         <PratoResList background="pink" cardapio={restaurante.cardapio} />
       )}
+      <Cart />
     </>
   )
 }

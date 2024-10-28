@@ -21,15 +21,7 @@ const PratoResList = ({ background, cardapio }: Props) => (
     <div className="container">
       <List>
         {cardapio.map((prato) => (
-          <PratoUn
-            key={prato.id}
-            id={prato.id}
-            nome={prato.nome}
-            descricao={prato.descricao}
-            foto={prato.foto}
-            porcao={prato.porcao}
-            preco={prato.preco}
-          />
+          <PratoUn prato={prato} key={prato.id} />
         ))}
       </List>
     </div>

@@ -42,11 +42,13 @@ export const Info = styled.p`
   }
 `
 
-export const Carrinho = styled.p`
+export const Carrinho = styled.a`
   margin-top: 82px;
   margin-bottom: 83px;
   font-weight: 900;
   font-size: 18px;
   line-height: 21px;
   color: ${cores.pinkChoque};
+  display: flex;
+  cursor: pointer;
 `
