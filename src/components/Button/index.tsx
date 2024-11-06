@@ -6,12 +6,22 @@ type Props = {
   to?: string
   onClick?: () => void
   children: string
+  id?: string
+  htmlType?: 'button' | 'submit' | 'reset'
 }
 
-const Button = ({ type, title, to, onClick, children }: Props) => {
+const Button = ({
+  type,
+  title,
+  to,
+  onClick,
+  children,
+  id,
+  htmlType
+}: Props) => {
   if (type === 'buttonRestaurante') {
     return (
-      <ButtonContainer type="button" title={title} onClick={onClick}>
+      <ButtonContainer type={htmlType} title={title} onClick={onClick}>
         {children}
       </ButtonContainer>
     )
@@ -19,6 +29,7 @@ const Button = ({ type, title, to, onClick, children }: Props) => {
 
   return (
     <ButtonLink
+      id={id}
       to={to as string}
       title={title}
       type="buttonPrato"

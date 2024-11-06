@@ -79,7 +79,7 @@ export const Sidebar = styled.aside`
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  > a {
+  .buttonCart {
     width: 100%;
     display: block;
     text-align: center;
@@ -93,6 +93,8 @@ export const Sidebar = styled.aside`
     font-weight: 700;
     font-size: 14px;
     line-height: 16px;
+    cursor: pointer;
+    margin-top: 8px;
   }
 `
 
@@ -152,5 +154,98 @@ export const CartItem = styled.li`
     bottom: 8px;
     right: 8px;
     cursor: pointer;
+  }
+`
+
+export const InputGroup = styled.div`
+  display: block;
+  margin-bottom: 8px;
+
+  .group {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      background-color: ${cores.pink};
+      border: 1px solid ${cores.pink};
+      margin-top: 8px;
+      height: 32px;
+      text-align: center;
+      justify-content: center;
+      padding: 8px 0px;
+      margin-bottom: 3px;
+
+      &.error {
+        border: 2px solid #4e2f76;
+        background-color: #c0aed7;
+      }
+    }
+  }
+
+  small {
+    color: #4e2f76;
+  }
+`
+
+export const SuccessContainer = styled.div`
+  color: ${cores.pink};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+
+  p {
+    margin-bottom: 24px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  h3 {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+  }
+`
+
+export const DeliveryContainer = styled.div`
+  color: ${cores.pink};
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+
+  h3 {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .last {
+    margin-bottom: 24px;
+  }
+  .lastCard {
+    margin-bottom: 16px;
+  }
+
+  .bigRow {
+    ${InputGroup}:first-child {
+      max-width: 228px;
+    }
+    ${InputGroup}:last-child {
+      max-width: 87px;
+    }
+  }
+`
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+
+  ${InputGroup} {
+    max-width: 155px;
+    width: 100%;
   }
 `

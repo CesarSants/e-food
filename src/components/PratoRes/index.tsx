@@ -33,6 +33,7 @@ const PratoUn = ({ prato }: Props) => {
   const addToCart = () => {
     dispatch(add(prato))
     dispatch(open())
+    setModalEstaAberto(false)
   }
 
   const fechaModal = () => {
