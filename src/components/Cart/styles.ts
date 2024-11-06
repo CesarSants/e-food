@@ -175,6 +175,11 @@ export const InputGroup = styled.div`
       padding: 8px 0px;
       margin-bottom: 3px;
 
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px ${cores.pink} inset !important;
+        /* -webkit-text-fill-color: green; */
+      }
+
       &.error {
         border: 2px solid #4e2f76;
         background-color: #c0aed7;

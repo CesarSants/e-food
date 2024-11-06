@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Cardapio } from '../../pages/Home'
+import { toast } from 'react-toastify'
 
 type CartState = {
   items: Cardapio[]
@@ -21,7 +22,7 @@ const cartSlice = createSlice({
       if (!prato) {
         state.items.push(action.payload)
       } else {
-        alert('O produto já está no carrinho')
+        toast.warn('O produto já esta no carrinho')
       }
     },
     remove: (state, action: PayloadAction<number>) => {

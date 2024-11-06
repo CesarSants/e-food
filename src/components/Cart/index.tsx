@@ -1,3 +1,5 @@
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   Overlay,
   CartContainer,
@@ -19,9 +21,10 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 // import InputMask from 'react-input-mask'
 
-const Cart = () => {
+const Cart: React.FC = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
+  const [toastId, setToastId] = useState<string | number | null>(null)
 
   // const [checkout, setCheckout] = useState(false)
   // const [payment, SetPayment] = useState(false)
@@ -40,7 +43,7 @@ const Cart = () => {
   const [currentStep, setCurrentStep] = useState('cart')
   const goToCart = () => setCurrentStep('cart')
   const goToDelivery = () => setCurrentStep('delivery')
-  const goToPayment = () => setCurrentStep('payment')
+  // const goToPayment = () => setCurrentStep('payment')
   const goToEnd = () => setCurrentStep('end')
   const goToDeliveryFromCart = () => {
     if (items.length >= 1) {
@@ -56,6 +59,24 @@ const Cart = () => {
       goToEnd()
     }
   }, [isSuccess])
+
+  const alertSuccess = () => {
+    if (toastId === null) {
+      const id = toast.success('Pedido realizado com sucesso!', {
+        onClose: () => setToastId(null)
+      })
+      setToastId(id)
+    }
+  }
+
+  const alertError = () => {
+    if (toastId === null) {
+      const id = toast.warn('Por favor, preencha todos os campos.', {
+        onClose: () => setToastId(null)
+      })
+      setToastId(id)
+    }
+  }
 
   const validateMaskedField = (
     value: string,
@@ -97,6 +118,10 @@ const Cart = () => {
         .min(3, 'A rua precisar ter pelo menos 3 caracteres'),
       cidade: Yup.string()
         .min(2, 'Preencha o nome da cidade')
+        .required('O campo é obrigatorio'),
+      cep: Yup.string()
+        .min(9, 'Preencha o CEP completo')
+        .max(9, 'Preencha o CEP completo')
         .required('O campo é obrigatorio'),
       numero: Yup.string()
         .required('O campo é obrigatorio')
@@ -212,10 +237,13 @@ const Cart = () => {
   }
 
   const formatCardNumber = (value: string) => {
-    return value
-      .replace(/\s?/g, '')
-      .replace(/(\d{4})/g, '$1 ')
-      .trim()
+    return (
+      value
+        // .replace(/\s?/g, '')
+        .replace(/[^\d]/g, '')
+        .replace(/(\d{4})/g, '$1 ')
+        .trim()
+    )
   }
 
   const formatSecurityCode = (value: string) => {
@@ -230,6 +258,10 @@ const Cart = () => {
     return value.replace(/\D/g, '').slice(0, 4)
   }
 
+  const formatNumber = (value: string) => {
+    return value.replace(/\D/g, '')
+  }
+
   const formatZipCode = (value: string) => {
     return value
       .replace(/\D/g, '')
@@ -237,11 +269,81 @@ const Cart = () => {
       .slice(0, 9)
   }
 
+  const formatOnlyLetters = (value: string) => {
+    return value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')
+  }
+
+  const verifyFields = (fields: Array<keyof typeof form.values>) => {
+    const fieldMinLengths: Partial<{
+      [key in keyof typeof form.values]: number
+    }> = {
+      recibidor: 5,
+      rua: 3,
+      cidade: 2,
+      cep: 9,
+      numero: 1,
+      cardCode: 3,
+      cardDisplayName: 5,
+      cardNumber: 19,
+      expiresMonth: 2,
+      expiresYear: 2
+    }
+
+    for (const field of fields) {
+      const fieldValue = form.values[field]
+      const minLength = fieldMinLengths[field]
+
+      if (
+        !fieldValue ||
+        (minLength !== undefined && fieldValue.length < minLength)
+      ) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  const goToPaymentFromDelivery = () => {
+    if (verifyFields(['recibidor', 'rua', 'cidade', 'cep', 'numero'])) {
+      setCurrentStep('payment')
+    } else {
+      alertError()
+    }
+  }
+
+  const goToEndFromPayment = () => {
+    if (
+      verifyFields([
+        'cardCode',
+        'cardDisplayName',
+        'cardNumber',
+        'expiresMonth',
+        'expiresYear'
+      ])
+    ) {
+      setCurrentStep('end')
+      alertSuccess()
+    } else {
+      alertError()
+    }
+  }
+
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay className={isOpen ? 'is-open' : ''} onClick={closeCart} />
       <Sidebar>
+        <ToastContainer
+          position="top-left"
+          autoClose={3000}
+          draggable
+          pauseOnHover
+          rtl={false}
+          newestOnTop
+          pauseOnFocusLoss
+        />
         {/* maneira correta porem sem resposta da api, portando fica carregando*/}
+        {/* {data && isSuccess ? ( */}
         {/* {data && isSuccess && currentStep === 'end' ? ( */}
         {currentStep === 'end' ? (
           <SuccessContainer>
@@ -320,7 +422,13 @@ const Cart = () => {
                       type="text"
                       name="recibidor"
                       value={form.values.recibidor}
-                      onChange={form.handleChange}
+                      onChange={(e) => {
+                        form.handleChange(e)
+                        form.setFieldValue(
+                          'recibidor',
+                          formatOnlyLetters(e.target.value)
+                        )
+                      }}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('recibidor') ? 'error' : ''}
                     />
@@ -337,7 +445,13 @@ const Cart = () => {
                       type="text"
                       name="rua"
                       value={form.values.rua}
-                      onChange={form.handleChange}
+                      onChange={(e) => {
+                        form.handleChange(e)
+                        form.setFieldValue(
+                          'rua',
+                          formatOnlyLetters(e.target.value)
+                        )
+                      }}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('rua') ? 'error' : ''}
                     />
@@ -352,7 +466,13 @@ const Cart = () => {
                       type="text"
                       name="cidade"
                       value={form.values.cidade}
-                      onChange={form.handleChange}
+                      onChange={(e) => {
+                        form.handleChange(e)
+                        form.setFieldValue(
+                          'cidade',
+                          formatOnlyLetters(e.target.value)
+                        )
+                      }}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('cidade') ? 'error' : ''}
                     />
@@ -389,7 +509,13 @@ const Cart = () => {
                         type="text"
                         name="numero"
                         value={form.values.numero}
-                        onChange={form.handleChange}
+                        onChange={(e) => {
+                          form.handleChange(e)
+                          form.setFieldValue(
+                            'numero',
+                            formatNumber(e.target.value)
+                          )
+                        }}
                         onBlur={form.handleBlur}
                         className={checkInputHasError('numero') ? 'error' : ''}
                       />
@@ -422,7 +548,8 @@ const Cart = () => {
                   title="Clique aqui para preencher os dados de pagamento"
                   type="button"
                   className="buttonCart"
-                  onClick={goToPayment}
+                  onClick={goToPaymentFromDelivery}
+                  // onClick={goToPayment}
                 >
                   Continuar com o pagamento
                 </button>
@@ -448,7 +575,13 @@ const Cart = () => {
                       type="text"
                       name="cardDisplayName"
                       value={form.values.cardDisplayName}
-                      onChange={form.handleChange}
+                      onChange={(e) => {
+                        form.handleChange(e)
+                        form.setFieldValue(
+                          'cardDisplayName',
+                          formatOnlyLetters(e.target.value)
+                        )
+                      }}
                       onBlur={form.handleBlur}
                       className={
                         checkInputHasError('cardDisplayName') ? 'error' : ''
@@ -478,19 +611,6 @@ const Cart = () => {
                             formatCardNumber(e.target.value)
                           )
                         }}
-                        onKeyDown={(e) => {
-                          if (
-                            !/[0-9]/.test(e.key) &&
-                            ![
-                              'Backspace',
-                              'Tab',
-                              'ArrowLeft',
-                              'ArrowRight'
-                            ].includes(e.key)
-                          ) {
-                            e.preventDefault()
-                          }
-                        }}
                         maxLength={19}
                         onBlur={form.handleBlur}
                         className={
@@ -510,27 +630,14 @@ const Cart = () => {
                         type="text"
                         name="cardCode"
                         value={form.values.cardCode}
-                        onChange={form.handleChange}
-                        onBlur={(e) => {
+                        onChange={(e) => {
                           form.handleChange(e)
                           form.setFieldValue(
-                            'cardSecurityCode',
+                            'cardCode',
                             formatSecurityCode(e.target.value)
                           )
                         }}
-                        onKeyDown={(e) => {
-                          if (
-                            !/[0-9]/.test(e.key) &&
-                            ![
-                              'Backspace',
-                              'Tab',
-                              'ArrowLeft',
-                              'ArrowRight'
-                            ].includes(e.key)
-                          ) {
-                            e.preventDefault()
-                          }
-                        }}
+                        onBlur={form.handleBlur}
                         maxLength={3}
                         className={
                           checkInputHasError('cardCode') ? 'error' : ''
@@ -603,7 +710,7 @@ const Cart = () => {
                   className="buttonCart"
                   title="Clique aqui para finalizar o pagamento"
                   type="submit"
-                  onClick={goToEnd}
+                  onClick={goToEndFromPayment}
                   // disabled={!form.isValid || form.isSubmitting}
                 >
                   Finalizar pagamento

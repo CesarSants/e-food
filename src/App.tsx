@@ -16,6 +16,9 @@ import Footer from './components/Footer'
 import ScrollToTop from './ScrollToTop'
 import { Provider } from 'react-redux'
 import { store } from './store'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { FC } from 'react'
 // import Cart from './components/Cart'
 
 // const rotas = createBrowserRouter([               esse metodo é utilizaDO usando o router provider, porem o header esta antes dele
@@ -29,7 +32,7 @@ import { store } from './store'
 //   }
 // ])
 
-function App() {
+const App: FC = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -42,6 +45,7 @@ function App() {
         {/* <RouterProvider router={Rotas} />            esse metodo é utilizado com o json, igual esta comentado no arquivo routes*/}
         <Rotas />
         <Footer />
+        <ToastContainer />
       </BrowserRouter>
     </Provider>
   )
