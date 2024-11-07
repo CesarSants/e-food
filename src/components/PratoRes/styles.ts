@@ -128,6 +128,8 @@ export const ModalContent = styled.div`
 
   @media (max-width: 790px) {
     overflow-y: auto;
+    max-width: 80vw !important;
+    height: 80vh !important;
 
     > img {
       position: absolute;
@@ -192,9 +194,6 @@ export const MainContent = styled.div`
     /* justify-content: center; */
     align-items: center;
     /* position: relative; */
-
-    max-width: 80vw;
-    height: 80vw;
 
     div:nth-child(2) {
       margin-left: 0;
