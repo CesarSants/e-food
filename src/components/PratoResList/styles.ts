@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Props } from '.'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { Card } from '../PratoRes/styles'
 
 export const Container = styled.section<Omit<Props, 'title' | 'cardapio'>>`
@@ -29,6 +29,15 @@ export const List = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 32px;
   /* margin-top: 48px; */
+
+  @media ((max-width: ${breakpoints.desktop}) and (min-width: ${breakpoints.tablet})) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const Title = styled.h2`

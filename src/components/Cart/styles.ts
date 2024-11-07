@@ -96,6 +96,10 @@ export const Sidebar = styled.aside`
     cursor: pointer;
     margin-top: 8px;
   }
+
+  @media (max-width: 500px) {
+    max-width: 283px;
+  }
 `
 
 export const Prices = styled.p`
@@ -213,6 +217,27 @@ export const SuccessContainer = styled.div`
   }
 `
 
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+
+  ${InputGroup} {
+    max-width: 155px;
+    width: 100%;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+
+    ${InputGroup} {
+      width: 100%;
+      max-width: none;
+    }
+  }
+`
+
 export const DeliveryContainer = styled.div`
   color: ${cores.pink};
   font-weight: 700;
@@ -240,17 +265,25 @@ export const DeliveryContainer = styled.div`
     ${InputGroup}:last-child {
       max-width: 87px;
     }
+
+    @media (max-width: 500px) {
+      ${InputGroup}:first-child {
+        max-width: none;
+      }
+
+      ${InputGroup}:last-child {
+        max-width: 115px;
+      }
+    }
   }
-`
 
-export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
+  @media (max-width: 500px) {
+    .lastCard {
+      flex-direction: row;
 
-  justify-content: space-between;
-
-  ${InputGroup} {
-    max-width: 155px;
-    width: 100%;
+      ${InputGroup} {
+        max-width: 115px;
+      }
+    }
   }
 `

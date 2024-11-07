@@ -5,7 +5,7 @@ import back from '../../assets/images/fundo.png'
 const HeaderHome = () => (
   <HeaderHomeBar style={{ backgroundImage: `url(${back})` }}>
     <Content className="container">
-      <img src={logoEFood} alt="EPLAY" />
+      <img src={logoEFood} alt="EFOOD" />
       <p>Viva experiências gastronômicas no conforto da sua casa</p>
     </Content>
   </HeaderHomeBar>

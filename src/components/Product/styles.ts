@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
@@ -20,6 +20,10 @@ export const Card = styled.div`
     object-position: 50% 50%; // porcentagem afeta so as que exedem a altura determinada enquando por px afeta todas
     /* object-position: 50% -20px; */
     vertical-align: bottom;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 100%;
+    }
   }
 
   .cont {

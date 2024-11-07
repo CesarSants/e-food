@@ -3,6 +3,7 @@
 // import italiano from '../../assets/images/italiano.png'
 // import { useEffect, useState } from 'react'
 import HeaderHome from '../../components/HeaderHome'
+import Loader from '../../components/Loader'
 import ProductsList from '../../components/ProductsList'
 import { useGetRestaurantesQuery } from '../../services/api'
 
@@ -114,7 +115,7 @@ const Home = () => {
       </>
     )
   }
-  return <h4>Carregando...</h4>
+  return <Loader />
 }
 
 export default Home

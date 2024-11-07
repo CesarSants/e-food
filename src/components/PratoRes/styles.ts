@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Card = styled.div`
   padding: 8px;
@@ -14,6 +14,14 @@ export const Card = styled.div`
     object-position: 50% 50%; // porcentagem afeta so as que exedem a altura determinada enquando por px afeta todas
     /* object-position: 50% -20px; */
     vertical-align: bottom;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    /* max-height: 359px; */
   }
 
   .cont {
@@ -44,6 +52,10 @@ export const Descricao = styled.p`
   -webkit-line-clamp: 6;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    -webkit-line-clamp: 4;
+  }
 `
 
 export const Infos = styled.div`
@@ -88,6 +100,10 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 790px) {
+    align-items: center;
+  }
+
   &.visible {
     display: flex;
   }
@@ -109,6 +125,15 @@ export const ModalContent = styled.div`
   z-index: 1;
   background-color: ${cores.pinkChoque};
   max-width: 1024px;
+
+  @media (max-width: 790px) {
+    overflow-y: auto;
+
+    > img {
+      position: absolute;
+      right: 0;
+    }
+  }
 
   > img {
     float: right;
@@ -134,7 +159,7 @@ export const MainContent = styled.div`
   }
 
   img {
-    display: block;
+    display: flex;
     width: 280px;
     height: 280px;
     object-fit: cover;
@@ -154,5 +179,44 @@ export const MainContent = styled.div`
     width: auto;
     display: inline-flex;
     padding: 4px 7px;
+    border-radius: 8px;
+
+    @media (max-width: 352px) {
+      padding: 20px 7px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 790px) {
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* position: relative; */
+
+    max-width: 80vw;
+    height: 80vw;
+
+    div:nth-child(2) {
+      margin-left: 0;
+      padding-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    img {
+      border-radius: 8px;
+      /* width: auto;
+      height: auto;
+      max-height: 280px;
+      max-width: 280px; */
+    }
+
+    h4 {
+      margin-top: 24px;
+    }
+
+    ${Botao} {
+    }
   }
 `

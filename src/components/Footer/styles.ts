@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Container = styled.footer`
   background-color: ${cores.pink};
@@ -20,6 +20,12 @@ export const Container = styled.footer`
       color: ${cores.pinkChoque};
       margin-top: 80px;
     }
+
+    @media (max-width: ${breakpoints.desktop}) {
+      p:last-child {
+        margin-top: 24px;
+      }
+    }
   }
 `
 export const Links = styled.ul`
@@ -28,6 +34,11 @@ export const Links = styled.ul`
   list-style: none;
   margin-top: 32px;
   padding: 0;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    text-align: center;
+    justify-content: center;
+  }
 `
 
 export const Linka = styled.a`

@@ -7,6 +7,7 @@ import PratoResList from '../../components/PratoResList'
 import Banner from '../../components/Banner'
 import { useGetRestaurantesInternoQuery } from '../../services/api'
 import Cart from '../../components/Cart'
+import Loader from '../../components/Loader'
 
 const InternoRestaurante = () => {
   const { id } = useParams()
@@ -56,7 +57,7 @@ const InternoRestaurante = () => {
   // Module not found: Error: Can't resolve 'jquery' in 'C:\Users\CesarSantos\Documents\fullSJAVA\Front-End\modulo-35-projeto-6\ex\src\pages\Categories'
 
   if (!restaurante) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (

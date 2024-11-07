@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const HeaderHomeBar = styled.header`
   background-color: ${cores.cinza};
@@ -15,6 +15,11 @@ export const Content = styled.div`
   justify-content: space-between;
   position: relative;
   align-items: center;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    flex-direction: column;
+  }
 
   a {
     img {
@@ -36,6 +41,10 @@ export const Info = styled.p`
   font-size: 18px;
   line-height: 21px;
 
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-top: 25px;
+  }
+
   a {
     color: ${cores.pinkChoque};
     text-decoration: none;
@@ -51,4 +60,10 @@ export const Carrinho = styled.a`
   color: ${cores.pinkChoque};
   display: flex;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-bottom: 25px;
+    margin-top: 25px;
+    align-items: center;
+  }
 `

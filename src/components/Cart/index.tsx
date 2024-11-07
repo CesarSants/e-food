@@ -19,6 +19,7 @@ import { usePurchaseMutation } from '../../services/api'
 import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import Loader from '../Loader'
 // import InputMask from 'react-input-mask'
 
 const Cart: React.FC = () => {
@@ -63,6 +64,7 @@ const Cart: React.FC = () => {
   const alertSuccess = () => {
     if (toastId === null) {
       const id = toast.success('Pedido realizado com sucesso!', {
+        containerId: 'cartToast',
         onClose: () => setToastId(null)
       })
       setToastId(id)
@@ -72,6 +74,7 @@ const Cart: React.FC = () => {
   const alertError = () => {
     if (toastId === null) {
       const id = toast.warn('Por favor, preencha todos os campos.', {
+        containerId: 'cartToast',
         onClose: () => setToastId(null)
       })
       setToastId(id)
@@ -236,6 +239,11 @@ const Cart: React.FC = () => {
     return hasError
   }
 
+  const generateRandomNumber = (): number => {
+    const randomLastTwoDigits = Math.floor(Math.random() * 100) // Gera um número entre 0 e 99
+    return parseInt(`100${randomLastTwoDigits.toString().padStart(2, '0')}`)
+  }
+
   const formatCardNumber = (value: string) => {
     return (
       value
@@ -334,6 +342,7 @@ const Cart: React.FC = () => {
       <Overlay className={isOpen ? 'is-open' : ''} onClick={closeCart} />
       <Sidebar>
         <ToastContainer
+          containerId={'cartToast'}
           position="top-left"
           autoClose={3000}
           draggable
@@ -348,7 +357,7 @@ const Cart: React.FC = () => {
         {currentStep === 'end' ? (
           <SuccessContainer>
             {/* <h3>Pedido realizado - {data.orderId}</h3> */}
-            <h3>Pedido realizado - xxx</h3>
+            <h3>Pedido realizado - {generateRandomNumber()}</h3>
             <p>
               Estamos felizes em informar que seu pedido já está em processo de
               preparação e, em breve, será entregue no endereço fornecido.
@@ -725,7 +734,7 @@ const Cart: React.FC = () => {
                 </button>
               </DeliveryContainer>
             ) : (
-              <h3>Carregando...</h3>
+              <Loader />
             )}
           </form>
         )}
