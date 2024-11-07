@@ -496,6 +496,8 @@ const Cart: React.FC = () => {
                         id="cep"
                         type="text"
                         name="cep"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={form.values.cep}
                         onChange={(e) => {
                           form.handleChange(e)
@@ -517,6 +519,8 @@ const Cart: React.FC = () => {
                         id="numero"
                         type="text"
                         name="numero"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={form.values.numero}
                         onChange={(e) => {
                           form.handleChange(e)
@@ -612,6 +616,8 @@ const Cart: React.FC = () => {
                         id="cardNumber"
                         type="text"
                         name="cardNumber"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={form.values.cardNumber}
                         onChange={(e) => {
                           form.handleChange(e)
@@ -638,6 +644,8 @@ const Cart: React.FC = () => {
                         id="cardCode"
                         type="text"
                         name="cardCode"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={form.values.cardCode}
                         onChange={(e) => {
                           form.handleChange(e)
@@ -666,6 +674,8 @@ const Cart: React.FC = () => {
                         id="expiresMonth"
                         type="text"
                         name="expiresMonth"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={form.values.expiresMonth}
                         onChange={(e) => {
                           form.handleChange(e)
@@ -695,6 +705,8 @@ const Cart: React.FC = () => {
                         id="expiresYear"
                         type="text"
                         name="expiresYear"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={form.values.expiresYear}
                         onChange={(e) => {
                           form.handleChange(e)
