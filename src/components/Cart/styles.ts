@@ -178,6 +178,7 @@ export const InputGroup = styled.div`
       justify-content: center;
       padding: 8px 0px;
       margin-bottom: 3px;
+      font-size: 16px;
 
       &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 30px ${cores.pink} inset !important;
