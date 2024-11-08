@@ -10,8 +10,9 @@ import {
 } from './styles'
 import close1 from '../../assets/images/close 1.png'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
 
 export interface PratoProps {
   id: number
@@ -28,14 +29,22 @@ export type Props = {
 
 const PratoUn = ({ prato }: Props) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
+  const itemsInCart = useSelector((state: RootReducer) => state.cart.items)
   const [isLoaded, setIsLoaded] = useState(false)
 
   const dispatch = useDispatch()
 
   const addToCart = () => {
-    dispatch(add(prato))
-    dispatch(open())
-    setModalEstaAberto(false)
+    const isGameInCart = itemsInCart.some((item) => item.id === prato.id)
+
+    if (!isGameInCart) {
+      dispatch(add(prato))
+      dispatch(open())
+      setModalEstaAberto(false)
+    } else {
+      dispatch(add(prato))
+      setModalEstaAberto(false)
+    }
   }
 
   const fechaModal = () => {

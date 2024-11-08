@@ -73,7 +73,7 @@ const Cart: React.FC = () => {
 
   const alertError = () => {
     if (toastId === null) {
-      const id = toast.warn('Por favor, preencha todos os campos.', {
+      const id = toast.warn('Por favor, preencha os campos corretamente.', {
         containerId: 'cartToast',
         onClose: () => setToastId(null)
       })
