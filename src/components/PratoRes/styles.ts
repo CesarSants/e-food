@@ -90,7 +90,7 @@ export const Botao = styled.span`
   }
 `
 export const Modal = styled.div`
-  display: none;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -99,13 +99,17 @@ export const Modal = styled.div`
   z-index: 1;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
   @media (max-width: 790px) {
     align-items: center;
-  }
-
-  &.visible {
-    display: flex;
   }
 
   .overlay {

@@ -28,6 +28,8 @@ export type Props = {
 
 const PratoUn = ({ prato }: Props) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+
   const dispatch = useDispatch()
 
   const addToCart = () => {
@@ -38,6 +40,12 @@ const PratoUn = ({ prato }: Props) => {
 
   const fechaModal = () => {
     setModalEstaAberto(false)
+    setIsLoaded(false)
+  }
+
+  const openModal = () => {
+    setModalEstaAberto(true)
+    setIsLoaded(true)
   }
 
   return (
@@ -47,12 +55,11 @@ const PratoUn = ({ prato }: Props) => {
         <div className="cont">
           <Titulo>{prato.nome}</Titulo>
           <Descricao>{prato.descricao}</Descricao>
-          <Botao onClick={() => setModalEstaAberto(true)}>
-            Adicionar ao carrinho
-          </Botao>
+          {/* <Botao onClick={() => setModalEstaAberto(true)}> */}
+          <Botao onClick={openModal}>Adicionar ao carrinho</Botao>
         </div>
       </Card>
-      <Modal className={modalEstaAberto ? 'visible' : ''}>
+      <Modal className={modalEstaAberto && isLoaded ? 'visible' : ''}>
         <ModalContent className="container">
           <img src={close1} onClick={() => setModalEstaAberto(false)} alt="" />
           <MainContent>

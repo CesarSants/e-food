@@ -81,23 +81,6 @@ const Cart: React.FC = () => {
     }
   }
 
-  const validateMaskedField = (
-    value: string,
-    minLength: number,
-    maxLength: number,
-    minMessage?: string,
-    maxMessage?: string
-  ) => {
-    const digits = value.replace(/\D/g, '')
-    if (digits.length < minLength) {
-      return minMessage
-    }
-    if (digits.length > maxLength) {
-      return maxMessage
-    }
-    return true
-  }
-
   const form = useFormik({
     initialValues: {
       recibidor: '',
@@ -130,16 +113,6 @@ const Cart: React.FC = () => {
         .required('O campo é obrigatorio')
         .min(1, 'Digite o número'),
       complemento: Yup.string(),
-      cardOwner: Yup.string()
-        .required('O campo é obrigatorio')
-        .min(5, 'O nome precisar ter pelo menos 5 caracteres'),
-      cpfCardOwner: Yup.string()
-        .required('O campo é obrigatorio')
-        .test(
-          'cpfCardOwner',
-          'O CPF deve estar completo',
-          (value) => validateMaskedField(value ?? '', 11, 11) === true
-        ),
       cardDisplayName: Yup.string()
         .required('O campo é obrigatorio')
         .min(5, 'O nome precisar ter pelo menos 5 caracteres'),
@@ -149,26 +122,17 @@ const Cart: React.FC = () => {
         .max(19, 'O campo deve conter o numero completo do cartão'),
       expiresMonth: Yup.string()
         .required('O campo é obrigatorio')
-        .test(
-          'expiresMonth',
-          'O campo deve conter os 2 numeros do mês',
-          (value) => validateMaskedField(value ?? '', 2, 2) === true
-        ),
+        .min(2, 'O campo deve conter os 2 numeros do mês')
+        .max(2, 'O campo deve conter os 2 numeros do mês'),
       expiresYear: Yup.string()
         .required('O campo é obrigatorio')
-        .test(
-          'expiresYear',
-          'O campo deve conter os 2 ultimos numeros do ano',
-          (value) => validateMaskedField(value ?? '', 2, 2) === true
-        ),
+        .min(2, 'O campo deve conter os 2 ultimos numeros do ano')
+        .max(2, 'O campo deve conter os 2 ultimos numeros do ano'),
 
       cardCode: Yup.string()
         .required('O campo é obrigatorio')
-        .test(
-          'cardCode',
-          'Deve conter 3 numeros',
-          (value) => validateMaskedField(value ?? '', 3, 3) === true
-        )
+        .min(3, 'O campo deve ter 3 numeros')
+        .max(3, 'O campo deve ter 3 numeros')
     }),
     onSubmit: (values) => {
       purchase({
@@ -208,8 +172,14 @@ const Cart: React.FC = () => {
   }
 
   const closeCart = () => {
-    dispatch(close())
-    goToCart()
+    if (currentStep === 'end') {
+      dispatch(close())
+      dispatch(clearItems())
+      goToCart()
+    } else {
+      dispatch(close())
+      goToCart()
+    }
   }
 
   const getTotalPrice = () => {
@@ -562,7 +532,6 @@ const Cart: React.FC = () => {
                   type="button"
                   className="buttonCart"
                   onClick={goToPaymentFromDelivery}
-                  // onClick={goToPayment}
                 >
                   Continuar com o pagamento
                 </button>
@@ -617,7 +586,7 @@ const Cart: React.FC = () => {
                         type="text"
                         name="cardNumber"
                         inputMode="numeric"
-                        pattern="[0-9]*"
+                        // pattern="[0-9]*"
                         value={form.values.cardNumber}
                         onChange={(e) => {
                           form.handleChange(e)
