@@ -84,7 +84,7 @@ const Cart: React.FC = () => {
 
   const form = useFormik({
     initialValues: {
-      recibidor: '',
+      recebedor: '',
       rua: '',
       cidade: '',
       cep: '',
@@ -97,7 +97,7 @@ const Cart: React.FC = () => {
       cardCode: ''
     },
     validationSchema: Yup.object({
-      recibidor: Yup.string()
+      recebedor: Yup.string()
         .min(5, 'O nome precisar ter pelo menos 5 caracteres')
         .required('O campo é obrigatorio'),
       rua: Yup.string()
@@ -138,7 +138,7 @@ const Cart: React.FC = () => {
     onSubmit: (values) => {
       purchase({
         delivery: {
-          receiver: values.recibidor,
+          receiver: values.recebedor,
           address: {
             description: values.rua,
             city: values.cidade,
@@ -256,7 +256,7 @@ const Cart: React.FC = () => {
     const fieldMinLengths: Partial<{
       [key in keyof typeof form.values]: number
     }> = {
-      recibidor: 5,
+      recebedor: 5,
       rua: 3,
       cidade: 2,
       cep: 9,
@@ -284,7 +284,7 @@ const Cart: React.FC = () => {
   }
 
   const goToPaymentFromDelivery = () => {
-    if (verifyFields(['recibidor', 'rua', 'cidade', 'cep', 'numero'])) {
+    if (verifyFields(['recebedor', 'rua', 'cidade', 'cep', 'numero'])) {
       setCurrentStep('payment')
     } else {
       alertError()
@@ -309,6 +309,18 @@ const Cart: React.FC = () => {
     }
   }
 
+  // function capitalizeFirstLetter(str: string): string {
+  //   if (!str) return ''
+  //   return str.charAt(0).toUpperCase() + str.slice(1)
+  // }
+
+  function capitalizeEachWord(str: string): string {
+    return str
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ')
+  }
+
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay className={isOpen ? 'is-open' : ''} onClick={closeCart} />
@@ -331,8 +343,18 @@ const Cart: React.FC = () => {
             <h3>Pedido realizado - {data.orderId.replace('#', '')}</h3>
             {/* <h3>Pedido realizado - {generateRandomNumber()}</h3> */}
             <p>
-              Estamos felizes em informar que seu pedido já está em processo de
-              preparação e, em breve, será entregue no endereço fornecido.
+              {capitalizeEachWord(form.values.recebedor)}, Estamos felizes em
+              informar que{' '}
+              {items.length > 1
+                ? `seu pedido dos pratos
+                ${items.map((item) => item.nome).join(', ')}`
+                : items.length === 1
+                ? `seu pedido do prato ${items[0].nome}`
+                : null}{' '}
+              já está em processo de preparação e, em breve, será entregue no
+              endereço: {form.values.rua}
+              {' - '}
+              {form.values.numero}.
               <br />
               <br />
               Gostaríamos de ressaltar que nossos entregadores não estão
@@ -397,25 +419,25 @@ const Cart: React.FC = () => {
                 <h3>Entrega</h3>
                 <InputGroup>
                   <div className="group">
-                    <label htmlFor="recibidor">Quem irá receber</label>
+                    <label htmlFor="recebedor">Quem irá receber</label>
                     <input
-                      id="recibidor"
+                      id="recebedor"
                       type="text"
-                      name="recibidor"
-                      value={form.values.recibidor}
+                      name="recebedor"
+                      value={form.values.recebedor}
                       onChange={(e) => {
                         form.handleChange(e)
                         form.setFieldValue(
-                          'recibidor',
+                          'recebedor',
                           formatOnlyLetters(e.target.value)
                         )
                       }}
                       onBlur={form.handleBlur}
-                      className={checkInputHasError('recibidor') ? 'error' : ''}
+                      className={checkInputHasError('recebedor') ? 'error' : ''}
                     />
                   </div>
                   <small>
-                    {getErrorMessage('recibidor', form.errors.recibidor)}
+                    {getErrorMessage('recebedor', form.errors.recebedor)}
                   </small>
                 </InputGroup>
                 <InputGroup>
