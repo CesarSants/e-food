@@ -20,6 +20,7 @@ import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import Loader from '../Loader'
+import { cores } from '../../styles'
 // import InputMask from 'react-input-mask'
 
 const Cart: React.FC = () => {
@@ -209,10 +210,10 @@ const Cart: React.FC = () => {
     return hasError
   }
 
-  const generateRandomNumber = (): number => {
-    const randomLastTwoDigits = Math.floor(Math.random() * 100) // Gera um número entre 0 e 99
-    return parseInt(`100${randomLastTwoDigits.toString().padStart(2, '0')}`)
-  }
+  // const generateRandomNumber = (): number => {
+  //   const randomLastTwoDigits = Math.floor(Math.random() * 100) // Gera um número entre 0 e 99
+  //   return parseInt(`100${randomLastTwoDigits.toString().padStart(2, '0')}`)
+  // }
 
   const formatCardNumber = (value: string) => {
     return (
@@ -290,7 +291,7 @@ const Cart: React.FC = () => {
     }
   }
 
-  const goToEndFromPayment = () => {
+  const goToEndFromPayment = async () => {
     if (
       verifyFields([
         'cardCode',
@@ -300,6 +301,7 @@ const Cart: React.FC = () => {
         'expiresYear'
       ])
     ) {
+      form.submitForm()
       setCurrentStep('end')
       alertSuccess()
     } else {
@@ -324,10 +326,10 @@ const Cart: React.FC = () => {
         {/* maneira correta porem sem resposta da api, portando fica carregando*/}
         {/* {data && isSuccess ? ( */}
         {/* {data && isSuccess && currentStep === 'end' ? ( */}
-        {currentStep === 'end' ? (
+        {currentStep === 'end' && data ? (
           <SuccessContainer>
-            {/* <h3>Pedido realizado - {data.orderId}</h3> */}
-            <h3>Pedido realizado - {generateRandomNumber()}</h3>
+            <h3>Pedido realizado - {data.orderId.replace('#', '')}</h3>
+            {/* <h3>Pedido realizado - {generateRandomNumber()}</h3> */}
             <p>
               Estamos felizes em informar que seu pedido já está em processo de
               preparação e, em breve, será entregue no endereço fornecido.
@@ -715,7 +717,10 @@ const Cart: React.FC = () => {
                 </button>
               </DeliveryContainer>
             ) : (
-              <Loader />
+              <Loader
+                backgroundColor={cores.pinkChoque}
+                loaderColor={cores.pink}
+              />
             )}
           </form>
         )}

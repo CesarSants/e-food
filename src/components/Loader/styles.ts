@@ -1,10 +1,17 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
-export const Container = styled.div`
+type ContainerProps = {
+  backgroundColor?: string
+}
+
+export const Container = styled.div<ContainerProps>`
   min-height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${cores.pinkback};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || cores.pinkback};
 `
+
+// background-color: currentColor;
