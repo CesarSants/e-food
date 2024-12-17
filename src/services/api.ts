@@ -53,7 +53,7 @@ const api = createApi({
     purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
       //unknown esta no lugar de any
       query: (body) => ({
-        url: 'https://fake-api-tau.vercel.app/api/efood/checkout',
+        url: 'https://fake-api-khaki.vercel.app/api/efood/checkout',
         method: 'POST',
         body
       })
