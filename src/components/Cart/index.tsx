@@ -64,7 +64,7 @@ const Cart: React.FC = () => {
 
   const alertSuccess = () => {
     if (toastId === null) {
-      const id = toast.success('Pedido realizado com sucesso! ', {
+      const id = toast.success('Pedido realizado com sucesso!', {
         containerId: 'cartToast',
         onClose: () => setToastId(null)
       })
