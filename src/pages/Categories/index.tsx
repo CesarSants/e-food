@@ -50,7 +50,7 @@ const InternoRestaurante = () => {
   //     })
   // }, [id])
   // ______________________________________________________________________
-
+ 
   //   Compiled with problems:                    //erro apos tentar instalar o jquery
   // ×
   // ERROR in ./src/pages/Categories/index.tsx 10:0-23
